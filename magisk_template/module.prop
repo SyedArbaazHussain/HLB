@@ -1,0 +1,6 @@
+﻿id=hlb_gesture_bypass
+name=HLB HyperOS Gesture Bridge
+version=v1.0
+versionCode=1
+author=Gemini
+description=Container launcher (com.miui.home) to bypass HyperOS gesture restrictions.

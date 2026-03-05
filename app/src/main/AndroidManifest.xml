@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.miui.home">
+    <uses-permission android:name="android.permission.STATUS_BAR_SERVICE" />
+    <application android:label="HLB Bridge" android:hasCode="true">
+        <activity android:name=".MainActivity" android:excludeFromRecents="true" android:exported="true" android:launchMode="singleInstance" android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <service android:name=".RecentsProviderService" android:permission="android.permission.BIND_REMOTEVIEWS" android:exported="true" />
+    </application>
+</manifest>
