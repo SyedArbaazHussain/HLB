@@ -1,9 +1,11 @@
 plugins {
     id 'com.android.application'
 }
+
 android {
     namespace 'com.miui.home'
     compileSdk 34
+
     defaultConfig {
         applicationId "com.miui.home"
         minSdk 24
@@ -11,9 +13,12 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
+            // This line tells the Release build to use the auto-generated Debug certificate
+            signingConfig signingConfigs.debug 
         }
     }
 }
