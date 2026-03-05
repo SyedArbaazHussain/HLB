@@ -1,4 +1,4 @@
-﻿package com.miui.home;
+package com.miui.home;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
