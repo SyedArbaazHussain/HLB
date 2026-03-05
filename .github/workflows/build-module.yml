@@ -18,28 +18,32 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
 
-      - name: Grant Execute Permission for Gradlew
-        run: chmod +x gradlew
+      - name: Bootstrap Gradle Wrapper
+        run: |
+          # Download the Gradle distribution to generate the wrapper files
+          wget https://services.gradle.org/distributions/gradle-8.5-bin.zip
+          unzip -q gradle-8.5-bin.zip
+          # Use the downloaded gradle to generate the local wrapper structure
+          ./gradle-8.5/bin/gradle wrapper --gradle-version 8.5
+          # Ensure the generated gradlew is executable
+          chmod +x gradlew
 
       - name: Build Redirector APK
         run: ./gradlew assembleRelease
 
       - name: Prepare Magisk Module Structure
         run: |
-          # Create a temporary staging directory
           mkdir -p output/system/priv-app/MiuiHome
           
-          # 1. Copy the compiled APK from the build folder to the Magisk structure
-          # We rename it to MiuiHome.apk so it correctly replaces the system launcher
+          # Copy compiled APK
           cp app/build/outputs/apk/release/*.apk output/system/priv-app/MiuiHome/MiuiHome.apk
           
-          # 2. Copy Magisk configuration and scripts
+          # Copy Magisk template files
           cp magisk_template/module.prop output/
           cp magisk_template/service.sh output/
           
-          # 3. Ensure scripts have correct Unix line endings and permissions
+          # Fix permissions for the Magisk boot script
           chmod +x output/service.sh
 
       - name: Zip Flashable Module
